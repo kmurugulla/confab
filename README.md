@@ -2,12 +2,23 @@
 
 (Work In Progress)
 
-A tool that will take site URL and gather the following about it , which can be used for planning - Total number of Pages based on Sitemap - Pages included / excluded from robots - CDN being used - TTLs for different asset types - Multi Lingual / Multi Region sites and their site page numbers - Project Complexity Score
-○ https://wiki.corp.adobe.com/display/WEM/Session+8%3A+Project+complexity - LHS Score of Mobile, Desktop - Breakpoints in use - CMS being used - Google Tag Manager usage
-○ Add action to create function to be added to delayed.js - Adobe Launch usage
-○ Add action to create function to be added to delayed.js - Cookie Consent ( OneTrust) - Hubspot integration - Vimeo - Youtube - Metadata Fields being used - Cross domain requests - Custom Data layer
-○ Window.digitalData
-Functional Domain of the website ( Finance, Medical, Retail etc.)
+A tool that will take site URL and gather the following about it , which can be used for planning
+
+- Total number of Pages based on Sitemap
+- Pages included / excluded from robots
+- CDN being used
+- TTLs for different asset types
+- Multi Lingual / Multi Region sites and their site page numbers
+- CMS being used
+- Google Tag Manager usage
+- Adobe Launch usage
+- Cookie Consent ( OneTrust)
+- Hubspot integration
+- Vimeo
+- Youtube
+- Metadata Fields being used
+- Cross domain requests
+- Custom Data layer
 
 ## Environments
 
