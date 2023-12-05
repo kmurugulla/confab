@@ -1,0 +1,17 @@
+.errormsg {
+    color:red;
+}
+.pagespeedinfo, .robotsinfo, .pagestats{
+    background-color: #eee;
+    padding: 20px 20px 0 50px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.paths-table, .paths-table th, .paths-table td {
+    border: 1px solid black;
+}
+
+.paths-table th {
+    background-color: aliceblue;
+}

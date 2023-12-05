@@ -11,10 +11,35 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  loadBlock,
 } from './aem.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
+/**
+ * Create an HTML tag in one line of code
+ * @param {string} tag Tag to create
+ * @param {object} attributes Key/value object of attributes
+ * @param {Element} html html to append to tag
+ * @returns {HTMLElement} The created tag
+ */
+export function createTag(tag, attributes, html = undefined) {
+  const element = document.createElement(tag);
+  if (html) {
+    if (html instanceof HTMLElement || html instanceof SVGElement) {
+      element.append(html);
+    } else {
+      element.insertAdjacentHTML('beforeend', html);
+    }
+  }
+  if (attributes) {
+    Object.entries(attributes)
+      .forEach(([key, val]) => {
+        element.setAttribute(key, val);
+      });
+  }
+  return element;
+}
 /**
  * Builds hero block and prepends to main in a new section.
  * @param {Element} main The container element
