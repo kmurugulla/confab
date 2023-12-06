@@ -1,4 +1,7 @@
-import { createTag } from '../../scripts/scripts.js';
+/* eslint-disable guard-for-in */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-restricted-syntax */
+import { createTag } from './scripts.js';
 
 function showInitialContent(id, div) {
   //   document.body.innerHTML = '';
@@ -11,7 +14,7 @@ function showInitialContent(id, div) {
 }
 
 function showCruxContent(cruxMetrics, div) {
-  const cruxHeader = document.createElement('h3');
+  const cruxHeader = document.createElement('h4');
   cruxHeader.textContent = 'Chrome User Experience Report Results';
   div.appendChild(cruxHeader);
   for (const key in cruxMetrics) {
@@ -22,7 +25,7 @@ function showCruxContent(cruxMetrics, div) {
 }
 
 function showLighthouseContent(lighthouseMetrics, div) {
-  const lighthouseHeader = document.createElement('h3');
+  const lighthouseHeader = document.createElement('h4');
   lighthouseHeader.textContent = 'Lighthouse Results';
   div.appendChild(lighthouseHeader);
   for (const key in lighthouseMetrics) {
@@ -64,7 +67,10 @@ export function runPagespeed(siteurl) {
       };
       showCruxContent(cruxMetrics, pageSpeedInfo);
       const lighthouse = json.lighthouseResult;
+      const score = lighthouse.categories.performance.score * 100;
       const lighthouseMetrics = {
+        'Form Factor': lighthouse.configSettings.formFactor,
+        'Perfomance Score': `${score}`,
         'First Contentful Paint': lighthouse.audits['first-contentful-paint'].displayValue,
         'Speed Index': lighthouse.audits['speed-index'].displayValue,
         'Time To Interactive': lighthouse.audits.interactive.displayValue,

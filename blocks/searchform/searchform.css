@@ -1,6 +1,7 @@
 .errormsg {
     color:red;
 }
+
 .pagespeedinfo, .robotsinfo, .pagestats{
     background-color: #eee;
     padding: 20px 20px 0 50px;
