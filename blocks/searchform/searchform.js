@@ -27,10 +27,10 @@ export default function decorate(block) {
     if (siteUrlTxt.value) {
       const siteURL = siteUrlTxt.value;
       msgLbl.textContent = '';
-      // msgLbl.textContent = `running page speed index  on ${siteURL}`;
-      // runPagespeed(siteURL);
       msgLbl.textContent = `fetching robots.txt of ${siteURL}`;
       parseRobotsTxt(siteURL);
+      msgLbl.textContent = `running page speed index  on ${siteURL}`;
+      runPagespeed(siteURL);
     } else {
       msgLbl.textContent = '';
       msgLbl.textContent = 'please enter a website url';

@@ -94,7 +94,7 @@ export function parseRobotsTxt(siteUrl) {
   fetch(robotsurl)
     .then((response) => response.text())
     .then((text) => {
-      showRobotsTxt(text);
       showPageCount(getSitemapURLs(text));
+      showRobotsTxt(text);
     });
 }

@@ -11,7 +11,7 @@ function showInitialContent(id, div) {
 }
 
 function showCruxContent(cruxMetrics, div) {
-  const cruxHeader = document.createElement('h3');
+  const cruxHeader = document.createElement('h4');
   cruxHeader.textContent = 'Chrome User Experience Report Results';
   div.appendChild(cruxHeader);
   for (const key in cruxMetrics) {
@@ -22,7 +22,7 @@ function showCruxContent(cruxMetrics, div) {
 }
 
 function showLighthouseContent(lighthouseMetrics, div) {
-  const lighthouseHeader = document.createElement('h3');
+  const lighthouseHeader = document.createElement('h4');
   lighthouseHeader.textContent = 'Lighthouse Results';
   div.appendChild(lighthouseHeader);
   for (const key in lighthouseMetrics) {
@@ -38,7 +38,7 @@ function setUpQuery(siteurl) {
     url: encodeURIComponent(siteurl),
 
   };
-  const apikey = 'AIzaSyAhEJc6OfXc_6t8F-3tk9t1HSw7kaw6l8w';
+  const apikey = '';
   let query = `${api}?`;
   for (const key in parameters) {
     query += `${key}=${parameters[key]}`;
@@ -64,7 +64,10 @@ export function runPagespeed(siteurl) {
       };
       showCruxContent(cruxMetrics, pageSpeedInfo);
       const lighthouse = json.lighthouseResult;
+      const score = lighthouse.categories.performance.score * 100;
       const lighthouseMetrics = {
+        'Form Factor': lighthouse.configSettings.formFactor,
+        'Perfomance Score': `${score}`,
         'First Contentful Paint': lighthouse.audits['first-contentful-paint'].displayValue,
         'Speed Index': lighthouse.audits['speed-index'].displayValue,
         'Time To Interactive': lighthouse.audits.interactive.displayValue,
