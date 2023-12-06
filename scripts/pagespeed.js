@@ -1,4 +1,7 @@
-import { createTag } from '../../scripts/scripts.js';
+/* eslint-disable guard-for-in */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-restricted-syntax */
+import { createTag } from './scripts.js';
 
 function showInitialContent(id, div) {
   //   document.body.innerHTML = '';

@@ -89,6 +89,7 @@ function showPageCount(sitemapurls) {
   });
   document.querySelector('.searchform').append(pagestats);
 }
+// eslint-disable-next-line import/prefer-default-export
 export function parseRobotsTxt(siteUrl) {
   const robotsurl = `${siteUrl}/robots.txt`;
   fetch(robotsurl)
