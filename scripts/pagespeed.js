@@ -38,7 +38,7 @@ function setUpQuery(siteurl) {
     url: encodeURIComponent(siteurl),
 
   };
-  const apikey = 'AIzaSyAhEJc6OfXc_6t8F-3tk9t1HSw7kaw6l8w';
+  const apikey = '';
   let query = `${api}?`;
   for (const key in parameters) {
     query += `${key}=${parameters[key]}`;
