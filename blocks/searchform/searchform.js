@@ -42,7 +42,7 @@ export default function decorate(block) {
   const siteUrlTxt = createTag('input', { type: 'text', placeholder: 'https://www.xyz.com', class: 'urlinput' });
   siteUrlTxt.value = 'https://www.ust.com'; // comment this after testing
   const startBtn = createTag('button', { id: 'start' });
-  startBtn.textContent = "Let's Go...";
+  startBtn.textContent = 'Collect';
   form.append(siteUrlLbl, siteUrlTxt, startBtn);
   block.append(form);
 
@@ -75,8 +75,11 @@ export default function decorate(block) {
         showIntegrationsInfo(origin);
         showPageStats(origin);
         showCDNInfoInstructions(origin);
-        showCDNInfo(origin);
-        buildAccordian(block);
+
+        // showCDNInfo(origin);
+        setTimeout(() => {
+          buildAccordian(block);
+        }, 100);
       } else {
         msgLbl.textContent = '';
         msgLbl.textContent = 'please enter a valid website url';

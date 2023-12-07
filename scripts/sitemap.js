@@ -110,6 +110,7 @@ export function showPageStats(siteUrl) {
   fetch(robotsurl)
     .then((response) => response.text())
     .then((robotsTxt) => {
+      showRobotsTxt(robotsTxt);
       const sitemapUrls = getSitemapURLs(robotsTxt);
       if (sitemapUrls && sitemapUrls.length > 0) {
         showPageCount(getSitemapURLs(robotsTxt));
@@ -117,7 +118,5 @@ export function showPageStats(siteUrl) {
         const sitemapurl = [`${siteUrl}/sitemap.xml`];
         showPageCount(sitemapurl);
       }
-
-      showRobotsTxt(robotsTxt);
     });
 }

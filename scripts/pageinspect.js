@@ -14,7 +14,7 @@ export function showPreview(url) {
   block.append(accordian, previewDIV);
 }
 
-export async function showMetadata(url) {
+export function showMetadata(url) {
   fetch(url).then((response) => response.text()).then((html) => {
     // Convert the HTML string into a document object
 
