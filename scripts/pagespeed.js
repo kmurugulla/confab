@@ -5,8 +5,8 @@ import { createTag } from './scripts.js';
 
 function showInitialContent(id, div) {
   //   document.body.innerHTML = '';
-  const title = document.createElement('h2');
-  title.textContent = 'PageSpeed Insights';
+  const title = document.createElement('h3');
+  title.textContent = 'Page Speed Insights';
   div.appendChild(title);
   const page = document.createElement('p');
   page.textContent = `Page tested: ${id}`;
@@ -35,29 +35,33 @@ function showLighthouseContent(lighthouseMetrics, div) {
   }
 }
 
-function setUpQuery(siteurl) {
+function setUpQuery(siteurl, strategy) {
   const api = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
   const parameters = {
     url: encodeURIComponent(siteurl),
-
+    strategy: `${strategy}`,
   };
   const apikey = '';
   let query = `${api}?`;
   for (const key in parameters) {
-    query += `${key}=${parameters[key]}`;
+    query += `${key}=${parameters[key]}&`;
   }
-  return `${query}&key=${apikey}`;
+  return `${query}key=${apikey}`;
 }
 
-export function runPagespeed(siteurl) {
-  const url = setUpQuery(siteurl);
+export function showPageSpeedInfo(siteurl, strategy) {
+  const url = setUpQuery(siteurl, strategy);
   const block = document.querySelector('.searchform');
-  const pageSpeedInfo = createTag('div', { class: 'pagespeedinfo' });
-  block.append(pageSpeedInfo);
+  const accordian = createTag('button', { class: 'accordion' });
+  accordian.innerText = `Page Speed (${strategy})`;
+  const pageSpeedInfo = createTag('div', { class: 'pagespeedinfo panel' });
+  pageSpeedInfo.innerText = 'Gathering page speed insights ..';
+  block.append(accordian, pageSpeedInfo);
   const msg = block.querySelector('.msg');
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
+      pageSpeedInfo.innerText = '';
       // See https://developers.google.com/speed/docs/insights/v5/reference/pagespeedapi/runpagespeed#response
       // to learn more about each of the properties in the response object.
       showInitialContent(json.id, pageSpeedInfo);
