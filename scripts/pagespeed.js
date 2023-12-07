@@ -54,8 +54,8 @@ export function showTreoshURL(url) {
   const accordian = createTag('button', { class: 'accordion' });
   accordian.innerText = `treo.sh (${url})`;
   const previewDIV = createTag('div', { class: 'treoshinfo panel' });
-  const previewtitle = createTag('h5');
-  previewtitle.innerText = 'Treosh Link';
+  const previewtitle = createTag('h3');
+  previewtitle.innerText = 'More details from Treo.sh';
   const treoshlink = createTag('a', { href: `https://treo.sh/sitespeed/${url}`, title: 'Treosh Report', target: '_blank' });
   treoshlink.innerText = 'Treo.sh report';
   const block = document.querySelector('.searchform');

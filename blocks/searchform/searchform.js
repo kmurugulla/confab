@@ -3,7 +3,7 @@ import { createTag } from '../../scripts/scripts.js';
 import { showPageSpeedInfo, showTreoshURL } from '../../scripts/pagespeed.js';
 import { showPageStats } from '../../scripts/sitemap.js';
 import { showPreview, showIntegrationsInfo, showMetadata } from '../../scripts/pageinspect.js';
-import { showCDNInfo } from '../../scripts/cdninfo.js';
+import { showCDNInfo, showCDNInfoInstructions } from '../../scripts/cdninfo.js';
 
 function isValidHttpUrl(str) {
   const pattern = new RegExp(
@@ -74,6 +74,7 @@ export default function decorate(block) {
         showMetadata(origin);
         showIntegrationsInfo(origin);
         showPageStats(origin);
+        showCDNInfoInstructions(origin);
         showCDNInfo(origin);
         buildAccordian(block);
       } else {

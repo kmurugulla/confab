@@ -30,6 +30,10 @@
     color: green;
 }
 
+* {
+    font-size: 16px;
+}
+
 p.info {
     color: maroon;
 }
@@ -69,5 +73,11 @@ p.info {
 .active, .accordion:hover {
     background-color: #ccc;
 }
-  
 
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
