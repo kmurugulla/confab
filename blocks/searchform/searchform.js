@@ -1,6 +1,6 @@
 import { createTag } from '../../scripts/scripts.js';
 
-import { showPageSpeedInfo } from '../../scripts/pagespeed.js';
+import { showPageSpeedInfo, showTreoshURL } from '../../scripts/pagespeed.js';
 import { showPageStats } from '../../scripts/sitemap.js';
 import { showPreview, showIntegrationsInfo, showMetadata } from '../../scripts/pageinspect.js';
 import { showCDNInfo } from '../../scripts/cdninfo.js';
@@ -69,6 +69,7 @@ export default function decorate(block) {
         // msgLbl.textContent = `Gathering details for  ${origin}`;
         showPageSpeedInfo(origin, 'MOBILE');
         showPageSpeedInfo(origin, 'DESKTOP');
+        showTreoshURL(origin);
         showPreview(origin);
         showMetadata(origin);
         showIntegrationsInfo(origin);

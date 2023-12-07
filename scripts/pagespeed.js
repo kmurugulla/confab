@@ -49,6 +49,20 @@ function setUpQuery(siteurl, strategy) {
   return `${query}key=${apikey}`;
 }
 
+export function showTreoshURL(url) {
+  // first load the site into an iframe
+  const accordian = createTag('button', { class: 'accordion' });
+  accordian.innerText = `treo.sh (${url})`;
+  const previewDIV = createTag('div', { class: 'treoshinfo panel' });
+  const previewtitle = createTag('h5');
+  previewtitle.innerText = 'Treosh Link';
+  const treoshlink = createTag('a', { href: `https://treo.sh/sitespeed/${url}`, title: 'Treosh Report', target: '_blank' });
+  treoshlink.innerText = 'Treo.sh report';
+  const block = document.querySelector('.searchform');
+  previewDIV.append(previewtitle, treoshlink);
+  block.append(accordian, previewDIV);
+}
+
 export function showPageSpeedInfo(siteurl, strategy) {
   const url = setUpQuery(siteurl, strategy);
   const block = document.querySelector('.searchform');
