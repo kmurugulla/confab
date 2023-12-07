@@ -1,13 +1,45 @@
 import { createTag } from '../../scripts/scripts.js';
 
-import { runPagespeed } from '../../scripts/pagespeed.js';
-import { parseRobotsTxt } from '../../scripts/sitemap.js';
+import { showPageSpeedInfo } from '../../scripts/pagespeed.js';
+import { showPageStats } from '../../scripts/sitemap.js';
+import { showPreview, showIntegrationsInfo, showMetadata } from '../../scripts/pageinspect.js';
+import { showCDNInfo } from '../../scripts/cdninfo.js';
 
+function isValidHttpUrl(str) {
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' // protocol
+      + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' // domain name
+      + '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+      + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' // port and path
+      + '(\\?[;&a-z\\d%_.~+=-]*)?' // query string
+      + '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i',
+  );
+  return pattern.test(str);
+}
+
+const buildAccordian = (block) => {
+  // const acc = block.querySelectorAll('.accordion');
+  const acc = block.querySelectorAll('.accordion');
+  let i;
+  for (i = 0; i < acc.length; i += 1) {
+    acc[i].addEventListener('click', function () {
+      this.classList.toggle('active');
+      const panel = this.nextElementSibling;
+
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = `${panel.scrollHeight}px`;
+      }
+    });
+  }
+};
 export default function decorate(block) {
   // create the search form
   const form = createTag('form');
   const siteUrlLbl = document.createTextNode('Site Url');
-  const siteUrlTxt = createTag('input', { type: 'text', placeholder: 'https://www.xyz.com' });
+  const siteUrlTxt = createTag('input', { type: 'text', placeholder: 'https://www.xyz.com', class: 'urlinput' });
   siteUrlTxt.value = 'https://www.ust.com'; // comment this after testing
   const startBtn = createTag('button', { id: 'start' });
   startBtn.textContent = "Let's Go...";
@@ -15,7 +47,7 @@ export default function decorate(block) {
   block.append(form);
 
   // event listener for button click
-  startBtn.addEventListener('click', (evt) => {
+  startBtn.addEventListener('click', async (evt) => {
     const msgLbl = createTag('label', { class: 'msg' });
     const prevMsg = block.querySelector('.msg');
     block.append(msgLbl);
@@ -26,14 +58,30 @@ export default function decorate(block) {
     evt.preventDefault();
     if (siteUrlTxt.value) {
       const siteURL = siteUrlTxt.value;
-      msgLbl.textContent = '';
-      msgLbl.textContent = `fetching robots.txt of ${siteURL}`;
-      parseRobotsTxt(siteURL);
-      msgLbl.textContent = `running page speed index  on ${siteURL}`;
-      runPagespeed(siteURL);
+      if (isValidHttpUrl(siteURL)) {
+        const url = new URL(siteURL);
+        const { origin } = url;
+        const divs = block.querySelectorAll('div');
+        divs.forEach((element) => {
+          element.innerText = '';
+        });
+        // msgLbl.textContent = '';
+        // msgLbl.textContent = `Gathering details for  ${origin}`;
+        showPageSpeedInfo(origin, 'MOBILE');
+        showPageSpeedInfo(origin, 'DESKTOP');
+        showPreview(origin);
+        showMetadata(origin);
+        showIntegrationsInfo(origin);
+        showPageStats(origin);
+        showCDNInfo(origin);
+        buildAccordian(block);
+      } else {
+        msgLbl.textContent = '';
+        msgLbl.textContent = 'please enter a valid website url';
+      }
     } else {
       msgLbl.textContent = '';
-      msgLbl.textContent = 'please enter a website url';
+      msgLbl.textContent = 'please enter a valid website url';
     }
   });
 }
