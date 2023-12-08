@@ -67,9 +67,9 @@ export function showPageSpeedInfo(siteurl, strategy) {
   const url = setUpQuery(siteurl, strategy);
   const resultscontainer = document.querySelector('.results-container');
   const accordian = createTag('button', { class: 'accordion' });
-  accordian.innerText = `Page Speed (${strategy})`;
+  accordian.innerText = `Page Speed (${strategy}) - ${siteurl}`;
   const pageSpeedInfo = createTag('div', { class: 'pagespeedinfo panel' });
-  pageSpeedInfo.innerText = 'Gathering page speed insights ..';
+  pageSpeedInfo.innerText = `Gathering page speed insights for ${siteurl}..`;
   resultscontainer.append(accordian, pageSpeedInfo);
   const msg = resultscontainer.querySelector('.msg');
   fetch(url)
