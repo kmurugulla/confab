@@ -35,6 +35,46 @@ const buildAccordian = (block) => {
     });
   }
 };
+
+function displayResults(event, siteUrlTxt, block) {
+  event.preventDefault();
+  const msgLbl = createTag('label', { class: 'msg' });
+  const prevMsg = block.querySelector('.msg');
+  block.append(msgLbl);
+  if (prevMsg) { prevMsg.remove(); }
+
+  if (document.querySelector('.pagespeedinfo')) {
+    document.querySelector('.pagespeedinfo').textContent = '';
+  }
+
+  if (siteUrlTxt.value) {
+    const siteURL = siteUrlTxt.value;
+    if (isValidHttpUrl(siteURL)) {
+      const url = new URL(siteURL);
+      const { origin } = url;
+      const divs = block.querySelectorAll('div');
+      divs.forEach((element) => {
+        element.innerText = '';
+      });
+
+      showPageSpeedInfo(origin, 'MOBILE');
+      showPageSpeedInfo(origin, 'DESKTOP');
+      showTreoshURL(origin);
+      showPreview(origin);
+      showMetadata(origin);
+      showIntegrationsInfo(origin);
+      showPageStats(origin);
+      showCDNInfoInstructions(origin);
+    } else {
+      msgLbl.textContent = '';
+      msgLbl.textContent = 'please enter a valid website url';
+    }
+  } else {
+    msgLbl.textContent = '';
+    msgLbl.textContent = 'please enter a valid website url';
+  }
+}
+
 export default function decorate(block) {
   // create the search form
   const form = createTag('form');
@@ -47,46 +87,13 @@ export default function decorate(block) {
   block.append(form);
 
   // event listener for button click
-  startBtn.addEventListener('click', async (evt) => {
-    const msgLbl = createTag('label', { class: 'msg' });
-    const prevMsg = block.querySelector('.msg');
-    block.append(msgLbl);
-    if (prevMsg) { prevMsg.remove(); }
-    if (document.querySelector('.pagespeedinfo')) {
-      document.querySelector('.pagespeedinfo').textContent = '';
-    }
-    evt.preventDefault();
-    if (siteUrlTxt.value) {
-      const siteURL = siteUrlTxt.value;
-      if (isValidHttpUrl(siteURL)) {
-        const url = new URL(siteURL);
-        const { origin } = url;
-        const divs = block.querySelectorAll('div');
-        divs.forEach((element) => {
-          element.innerText = '';
-        });
-        // msgLbl.textContent = '';
-        // msgLbl.textContent = `Gathering details for  ${origin}`;
-        showPageSpeedInfo(origin, 'MOBILE');
-        showPageSpeedInfo(origin, 'DESKTOP');
-        showTreoshURL(origin);
-        showPreview(origin);
-        showMetadata(origin);
-        showIntegrationsInfo(origin);
-        showPageStats(origin);
-        showCDNInfoInstructions(origin);
-
-        // showCDNInfo(origin);
-        setTimeout(() => {
-          buildAccordian(block);
-        }, 100);
-      } else {
-        msgLbl.textContent = '';
-        msgLbl.textContent = 'please enter a valid website url';
-      }
-    } else {
-      msgLbl.textContent = '';
-      msgLbl.textContent = 'please enter a valid website url';
-    }
+  startBtn.addEventListener('click', (evt) => {
+    const resultscontainer = createTag('div', { class: 'results-container' });
+    resultscontainer.textContent = '';
+    block.append(resultscontainer);
+    displayResults(evt, siteUrlTxt, block);
+    setTimeout(() => {
+      buildAccordian(block);
+    }, 500);
   });
 }

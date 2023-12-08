@@ -58,20 +58,20 @@ export function showTreoshURL(url) {
   previewtitle.innerText = 'More details from Treo.sh';
   const treoshlink = createTag('a', { href: `https://treo.sh/sitespeed/${url}`, title: 'Treosh Report', target: '_blank' });
   treoshlink.innerText = 'Treo.sh report';
-  const block = document.querySelector('.searchform');
+  const resultscontainer = document.querySelector('.results-container');
   previewDIV.append(previewtitle, treoshlink);
-  block.append(accordian, previewDIV);
+  resultscontainer.append(accordian, previewDIV);
 }
 
 export function showPageSpeedInfo(siteurl, strategy) {
   const url = setUpQuery(siteurl, strategy);
-  const block = document.querySelector('.searchform');
+  const resultscontainer = document.querySelector('.results-container');
   const accordian = createTag('button', { class: 'accordion' });
   accordian.innerText = `Page Speed (${strategy})`;
   const pageSpeedInfo = createTag('div', { class: 'pagespeedinfo panel' });
   pageSpeedInfo.innerText = 'Gathering page speed insights ..';
-  block.append(accordian, pageSpeedInfo);
-  const msg = block.querySelector('.msg');
+  resultscontainer.append(accordian, pageSpeedInfo);
+  const msg = resultscontainer.querySelector('.msg');
   fetch(url)
     .then((response) => response.json())
     .then((json) => {

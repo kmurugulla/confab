@@ -32,8 +32,8 @@ export function showCDNInfoInstructions(siteurl) {
   <li> Go to ${siterelic.outerHTML} </li>
   `;
   cdninstructions.append(instructions);
-  const block = document.querySelector('.searchform');
-  block.append(accordian, cdninstructions);
+  const resultscontainer = document.querySelector('.results-container');
+  resultscontainer.append(accordian, cdninstructions);
 }
 
 export async function showCDNInfo(siteurl) {
@@ -51,7 +51,7 @@ export async function showCDNInfo(siteurl) {
     code.innerText = data;
     title.innerText = 'CDN Information';
     cdninfo.append(title, code);
-    const block = document.querySelector('.searchform');
-    block.append(accordian, cdninfo);
+    const resultscontainer = document.querySelector('.results-container');
+    resultscontainer.append(accordian, cdninfo);
   });
 }

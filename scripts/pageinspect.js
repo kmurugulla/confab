@@ -8,10 +8,10 @@ export function showPreview(url) {
   const previewDIV = createTag('div', { class: 'previewinfo panel' });
   const previewtitle = createTag('h3');
   previewtitle.innerText = 'Preview';
-  const iframe = createTag('iframe', { src: `${url}?platform=desktop`, class: 'previewframe', title: 'Site Preview' });
-  const block = document.querySelector('.searchform');
+  const iframe = createTag('iframe', { src: `${url}`, class: 'previewframe', title: 'Site Preview' });
+  const resultscontainer = document.querySelector('.results-container');
   previewDIV.append(previewtitle, iframe);
-  block.append(accordian, previewDIV);
+  resultscontainer.append(accordian, previewDIV);
 }
 
 export function showMetadata(url) {
@@ -24,8 +24,8 @@ export function showMetadata(url) {
     const title = createTag('h3');
     title.innerText = 'Metadata';
     metaInfo.append(title);
-    const block = document.querySelector('.searchform');
-    block.append(accordian, metaInfo);
+    const resultscontainer = document.querySelector('.results-container');
+    resultscontainer.append(accordian, metaInfo);
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const metatags = doc.querySelectorAll('head > meta');
@@ -48,8 +48,8 @@ export function showIntegrationsInfo(url) {
   const title = createTag('h3');
   title.innerText = 'Integrations';
   integrationInfo.append(title);
-  const block = document.querySelector('.searchform');
-  block.append(accordian, integrationInfo);
+  const resultscontainer = document.querySelector('.results-container');
+  resultscontainer.append(accordian, integrationInfo);
 
   fetch(url).then((response) => response.text()).then((html) => {
     // Convert the HTML string into a document object

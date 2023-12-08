@@ -10,7 +10,7 @@ function showRobotsTxt(text) {
   const info = createTag('p');
   info.innerText = text;
   robotsinfo.append(heading, info);
-  document.querySelector('.searchform').append(accordian, robotsinfo);
+  document.querySelector('.results-container').append(accordian, robotsinfo);
 }
 
 function getSitemapURLs(robotsTxt) {
@@ -102,7 +102,7 @@ function showPageCount(sitemapurls) {
       });
   });
 
-  document.querySelector('.searchform').append(accordian, pagestats);
+  document.querySelector('.results-container').append(accordian, pagestats);
 }
 // eslint-disable-next-line import/prefer-default-export
 export function showPageStats(siteUrl) {
