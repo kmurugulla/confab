@@ -80,7 +80,7 @@ export default function decorate(block) {
   const form = createTag('form');
   const siteUrlLbl = document.createTextNode('Site Url');
   const siteUrlTxt = createTag('input', { type: 'text', placeholder: 'https://www.xyz.com', class: 'urlinput' });
-  siteUrlTxt.value = 'https://www.ust.com'; // comment this after testing
+  siteUrlTxt.value = 'https://www.famous-smoke.com'; // comment this after testing
   const startBtn = createTag('button', { id: 'start' });
   startBtn.textContent = 'Collect';
   form.append(siteUrlLbl, siteUrlTxt, startBtn);
@@ -94,6 +94,6 @@ export default function decorate(block) {
     displayResults(evt, siteUrlTxt, block);
     setTimeout(() => {
       buildAccordian(block);
-    }, 500);
+    }, 2000);
   });
 }
