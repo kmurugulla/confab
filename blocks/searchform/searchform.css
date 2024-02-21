@@ -62,6 +62,10 @@ p.info {
     border-radius: 0;
 }
 
+.accordion.error {
+    color: red;
+}
+
 .accordion::after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 13px;
