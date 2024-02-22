@@ -12,7 +12,6 @@ body {
     max-width: 600px;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 40px;
   }
   
@@ -26,8 +25,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    margin: 0 auto 20px auto;
+    margin: 0 auto 20px;
   }
   
   .form-container {
@@ -113,7 +111,7 @@ body {
 
 .tooltip {
   position: absolute;
-  top: 0px; 
+  top: 0; 
   left: calc(100% + 10px);
   background-color: #333;
   color: #fff;
