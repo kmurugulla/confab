@@ -36,7 +36,7 @@ const buildAccordian = (block) => {
   }
 };
 
-function displayResults(event, siteUrlTxt, block) {
+async function displayResults(event, siteUrlTxt, block) {
   event.preventDefault();
   const msgLbl = createTag('label', { class: 'msg' });
   const prevMsg = block.querySelector('.msg');
@@ -64,7 +64,7 @@ function displayResults(event, siteUrlTxt, block) {
       showMetadata(origin);
       showIntegrationsInfo(origin);
       showPageStats(origin);
-      showCDNInfoInstructions(origin);
+      await showCDNInfoInstructions(origin);
     } else {
       msgLbl.textContent = '';
       msgLbl.textContent = 'please enter a valid website url';
@@ -87,11 +87,11 @@ export default function decorate(block) {
   block.append(form);
 
   // event listener for button click
-  startBtn.addEventListener('click', (evt) => {
+  startBtn.addEventListener('click', async (evt) => {
     const resultscontainer = createTag('div', { class: 'results-container' });
     resultscontainer.textContent = '';
     block.append(resultscontainer);
-    displayResults(evt, siteUrlTxt, block);
+    await displayResults(evt, siteUrlTxt, block);
     setTimeout(() => {
       buildAccordian(block);
     }, 2000);

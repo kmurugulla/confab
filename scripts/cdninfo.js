@@ -1,13 +1,13 @@
 import { createTag } from './scripts.js';
+import { guesscdnbycname } from './guesscnamecdn.js';
 /* eslint-disable import/prefer-default-export */
 // Example POST method implementation:
 async function postData(data) {
   // Default options are marked with *
-  const response = await fetch('https://api.siterelic.com/dnsrecord', {
+  const response = await fetch('https://316182-discovercdn-stage.adobeioruntime.net/api/v1/web/discoverDNS/findCNAME', {
     method: 'POST',
     referrerPolicy: 'no-referrer',
     headers: {
-      'x-api-key': '430fccef-22fe-4634-808f-6d64cf9f6702',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -15,7 +15,27 @@ async function postData(data) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-export function showCDNInfoInstructions(siteurl) {
+export async function showCDNInfo(siteurl) {
+  const payload = {
+    hostname: `${siteurl}`,
+  };
+  const accordian = createTag('button', { class: 'accordion' });
+  accordian.innerText = 'CDN Information Loading';
+  accordian.value = 'CDN';
+  const cdninfo = createTag('div', { class: 'cdninfo panel' });
+  const title = createTag('h3');
+  const code = createTag('p', { class: 'code' });
+  title.innerText = 'CDN Information';
+  cdninfo.append(title, code);
+  const resultscontainer = document.querySelector('.results-container');
+  resultscontainer.append(accordian, cdninfo);
+  await postData(payload).then((data) => {
+    code.innerText = guesscdnbycname(data.payload);
+    accordian.innerText = 'CDN Information';
+  });
+}
+
+export async function showCDNInfoInstructions(siteurl) {
   const accordian = createTag('button', { class: 'accordion' });
   accordian.innerText = 'Instructions to get CDN in use';
   const cdninstructions = createTag('div', { class: 'cdninstructions panel' });
@@ -34,24 +54,5 @@ export function showCDNInfoInstructions(siteurl) {
   cdninstructions.append(instructions);
   const resultscontainer = document.querySelector('.results-container');
   resultscontainer.append(accordian, cdninstructions);
-}
-
-export async function showCDNInfo(siteurl) {
-  const payload = {
-    url: `${siteurl}`,
-    types: ['A', 'MX', 'CNAME'],
-  };
-
-  await postData(payload).then((data) => {
-    const accordian = createTag('button', { class: 'accordion' });
-    accordian.value = 'CDN';
-    const cdninfo = createTag('div', { class: 'cdninfo,panel' });
-    const title = createTag('h3');
-    const code = createTag('p', { class: 'code' });
-    code.innerText = data;
-    title.innerText = 'CDN Information';
-    cdninfo.append(title, code);
-    const resultscontainer = document.querySelector('.results-container');
-    resultscontainer.append(accordian, cdninfo);
-  });
+  await showCDNInfo(siteurl);
 }
