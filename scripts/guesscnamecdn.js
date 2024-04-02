@@ -75,6 +75,7 @@ const CDN_PROVIDER = [
   ['.yimg.', 'Yahoo'],
   ['.zenedge.net', 'Zenedge'],
   ['.azureedge.net', 'Azure CDN'],
+  ['hlxcdn.adobeaemcloud.com', 'Edge Delivery CDN'],
 ];
 
 export function guesscdnbycname(item) {
@@ -88,5 +89,5 @@ export function guesscdnbycname(item) {
       break;
     }
   }
-  return cdn;
+  return cdn !== null ? cdn : item;
 }

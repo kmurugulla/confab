@@ -19,18 +19,19 @@ export async function showCDNInfo(siteurl) {
   const payload = {
     hostname: `${siteurl}`,
   };
+  const accordian = createTag('button', { class: 'accordion' });
+  accordian.innerText = 'CDN Information Loading';
+  accordian.value = 'CDN';
+  const cdninfo = createTag('div', { class: 'cdninfo panel' });
+  const title = createTag('h3');
+  const code = createTag('p', { class: 'code' });
+  title.innerText = 'CDN Information';
+  cdninfo.append(title, code);
+  const resultscontainer = document.querySelector('.results-container');
+  resultscontainer.append(accordian, cdninfo);
   await postData(payload).then((data) => {
-    const accordian = createTag('button', { class: 'accordion' });
-    accordian.innerText = 'CDN';
-    accordian.value = 'CDN';
-    const cdninfo = createTag('div', { class: 'cdninfo panel' });
-    const title = createTag('h3');
-    const code = createTag('p', { class: 'code' });
     code.innerText = guesscdnbycname(data.payload);
-    title.innerText = 'CDN Information';
-    cdninfo.append(title, code);
-    const resultscontainer = document.querySelector('.results-container');
-    resultscontainer.append(accordian, cdninfo);
+    accordian.innerText = 'CDN Information';
   });
 }
 
